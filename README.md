@@ -53,6 +53,39 @@ jd-investment-queue/
 }
 ```
 
+## 운영 방식
+
+김수석이 투자 대화 중 확정된 판단을 `investment-queue.json`에 반영합니다. JD가 직접 보드를 관리하는 구조가 아니라, JD는 보드를 보고 판단하고 김수석이 원장을 운영합니다.
+
+업데이트 기준:
+
+- JD 명시 지시: `updatedBy`를 `JD 지시`로 기록하고 `status`는 보통 `확정`
+- 대화 중 김수석 판단 확정: `updatedBy`를 `김수석 판단`으로 기록하고 `status`는 `확정`
+- JD 확인이 필요한 판단: `status`를 `제안`
+- 정보 부족 또는 가격/실적/수급 확인 전: `status`를 `보류`
+
+운영 절차:
+
+```sh
+jq empty investment-queue.json
+node --check app.js
+git diff -- investment-queue.json
+git add investment-queue.json README.md
+git commit -m "Update investment queue data"
+git push origin main
+```
+
+GitHub Pages 반영에는 보통 수십 초에서 몇 분이 걸릴 수 있습니다.
+
+## 분류 원칙
+
+각 종목은 반드시 4개 중 하나에만 들어갑니다.
+
+- 신규매수: 미보유이고 지금 매수 검토가 가능한 후보
+- 추가매수: 보유 중이고 지금 증액 검토가 가능한 후보
+- 관망: 관심은 있지만 가격, 실적, 수급, 밸류 조건이 아직 부족한 후보
+- 보유관리: 보유 중이나 지금은 증액보다 thesis 점검, 리스크 관리, 트리거 감시가 우선인 후보
+
 ## 구현 범위
 
 - 프레임워크 없는 HTML/CSS/Vanilla JS
