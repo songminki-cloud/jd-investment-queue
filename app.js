@@ -150,7 +150,7 @@ function renderBoard(groups) {
 }
 
 function setupQueueTabs() {
-  document.querySelectorAll(".queue-tabs a").forEach((link) => {
+  document.querySelectorAll(".queue-tabs a, .summary-link").forEach((link) => {
     link.addEventListener("click", (event) => {
       const targetId = link.getAttribute("href")?.slice(1);
       const target = targetId ? document.getElementById(targetId) : null;
