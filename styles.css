@@ -305,7 +305,8 @@ h1 {
 .status-pill,
 .market-chip,
 .priority-chip,
-.holding-chip {
+.holding-chip,
+.source-chip {
   display: inline-flex;
   align-items: center;
   min-height: 22px;
@@ -342,7 +343,8 @@ h1 {
 
 .market-chip,
 .priority-chip,
-.holding-chip {
+.holding-chip,
+.source-chip {
   background: var(--panel-2);
   color: var(--gray);
 }

@@ -47,6 +47,7 @@ jd-investment-queue/
   "category": "신규매수",
   "priority": 1,
   "holdingStatus": "미보유",
+  "sourceType": "김수석 제안",
   "thesis": "AI ASIC/네트워킹 직접 노출 보강",
   "nextAction": "가격/밸류 확인 후 정찰병 검토",
   "risk": "고밸류 구간 추격 리스크",
@@ -67,6 +68,12 @@ jd-investment-queue/
 - 대화 중 김수석 판단 확정: `updatedBy`를 `김수석 판단`으로 기록하고 `status`는 `확정`
 - JD 확인이 필요한 판단: `status`를 `제안`
 - 정보 부족 또는 가격/실적/수급 확인 전: `status`를 `보류`
+
+출처 기준:
+
+- `JD 언급`: JD가 직접 언급했거나 정정한 종목/섹터
+- `김수석 제안`: JD의 대화 맥락에서 김수석이 확장 제안한 후보
+- `보유원장 기반`: 현재 보유 원장에서 나온 보유관리 대상
 
 운영 절차:
 

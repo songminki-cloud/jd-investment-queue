@@ -116,6 +116,7 @@ function createCard(item, queueCode, displayIndex) {
     ? `${queuePosition} · 우선순위 ${item.priority}`
     : `${queuePosition} · 우선순위 없음`;
   card.querySelector(".holding-chip").textContent = item.holdingStatus;
+  card.querySelector(".source-chip").textContent = item.sourceType || "출처 미분류";
   card.querySelector('[data-field="thesis"]').textContent = item.thesis;
   card.querySelector('[data-field="nextAction"]').textContent = item.nextAction;
   card.querySelector('[data-field="risk"]').textContent = item.risk;
