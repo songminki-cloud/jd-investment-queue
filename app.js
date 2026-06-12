@@ -148,6 +148,40 @@ function isKoreanTicker(item) {
   return market === "KR" || market === "ETF" || (market !== "US" && /^\d{6}$/.test(ticker));
 }
 
+const tossProductCodesByTicker = {
+  AAPL: "US19801212001",
+  AMZN: "US19970515001",
+  ASTS: "US20210407001",
+  AVGO: "US20090806002",
+  BYND: "US20190501001",
+  CIEN: "US20131223002",
+  COHR: "US19871002001",
+  CRWV: "NAS0250328002",
+  DIS: "US19620102001",
+  GLW: "US19450521001",
+  GOOGL: "US20040819002",
+  HUT: "US20210615004",
+  IREN: "US20211116005",
+  LITE: "US20150805002",
+  MRVL: "US20000627001",
+  MSFT: "US19860313001",
+  NBIS: "US20110524001",
+  NFLX: "US20020523001",
+  NKE: "US19901017001",
+  NOW: "US20120629001",
+  NVDA: "US19990122001",
+  PL: "US20211208011",
+  PLTR: "US20200930014",
+  QQQ: "US19990310001",
+  RDW: "US20210903005",
+  RKLB: "US20210825002",
+  SBUX: "US19920626001",
+  TEM: "NAS0240614002",
+  TSLA: "US20100629001",
+  TSLL: "US20220809012",
+  VOO: "US20100909007",
+};
+
 function tossStockCodeForItem(item) {
   const ticker = String(item.ticker || "").trim().toUpperCase();
   if (!ticker) return null;
@@ -156,7 +190,7 @@ function tossStockCodeForItem(item) {
     return ticker.startsWith("A") ? ticker : `A${ticker}`;
   }
 
-  return ticker;
+  return tossProductCodesByTicker[ticker] || ticker;
 }
 
 function tossAppUrlForItem(item) {
