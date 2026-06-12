@@ -9,17 +9,25 @@
   <body>
     <main class="app-shell">
       <header class="topbar">
-        <div>
+        <div class="title-block">
           <p class="eyebrow">김수석 판단 큐</p>
           <h1>JD 투자 큐 보드</h1>
+          <p class="board-meta">
+            <span id="itemCount">-</span>
+            <span aria-hidden="true">·</span>
+            <span id="refreshStatus">대기</span>
+          </p>
         </div>
         <div class="top-actions">
-          <button id="refreshButton" class="refresh-button" type="button">새로고침</button>
-          <div class="meta-box">
-            <span>ITEMS</span>
-            <strong id="itemCount">-</strong>
-          </div>
-          <span id="refreshStatus" class="refresh-status">대기</span>
+          <button
+            id="refreshButton"
+            class="refresh-button"
+            type="button"
+            aria-label="가격 새로고침"
+            title="가격 새로고침"
+          >
+            <span aria-hidden="true">↻</span>
+          </button>
         </div>
       </header>
 
@@ -84,7 +92,10 @@
         <header class="stock-head">
           <span class="position-badge"></span>
           <div>
-            <h3></h3>
+            <div class="stock-title-row">
+              <h3></h3>
+              <span class="change-chip" hidden></span>
+            </div>
             <p class="ticker"></p>
           </div>
           <span class="status-pill"></span>
@@ -94,7 +105,6 @@
           <span class="priority-chip"></span>
           <span class="holding-chip"></span>
           <span class="source-chip"></span>
-          <span class="change-chip" hidden></span>
         </div>
         <dl class="stock-lines">
           <div>
