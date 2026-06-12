@@ -148,27 +148,45 @@ function isKoreanTicker(item) {
   return market === "KR" || market === "ETF" || (market !== "US" && /^\d{6}$/.test(ticker));
 }
 
-function securitiesUrlForItem(item) {
-  const market = String(item.market || "").toUpperCase();
+function tossStockCodeForItem(item) {
   const ticker = String(item.ticker || "").trim().toUpperCase();
-  if (!ticker) return "https://finance.yahoo.com/";
+  if (!ticker) return null;
 
   if (isKoreanTicker(item)) {
-    const naverType = market === "ETF" ? "etf" : "stock";
-    return `https://m.stock.naver.com/domestic/${naverType}/${encodeURIComponent(ticker)}/total`;
+    return ticker.startsWith("A") ? ticker : `A${ticker}`;
   }
 
-  return `https://finance.yahoo.com/quote/${encodeURIComponent(ticker)}`;
+  return ticker;
 }
 
-function securitiesLabelForItem(item) {
-  return isKoreanTicker(item) ? "네이버증권" : "Yahoo Finance";
+function tossAppUrlForItem(item) {
+  const stockCode = tossStockCodeForItem(item);
+  if (!stockCode) return "https://toss.onelink.me/3563614660";
+
+  const landingPath = `/stocks/${encodeURIComponent(stockCode)}?utm_source=jd_queue`;
+  const serviceUrl =
+    `https://service.tossinvest.com?nextLandingUrl=${encodeURIComponent(landingPath)}`;
+  const deepLink =
+    `supertoss://securities?url=${encodeURIComponent(serviceUrl)}` +
+    "&clearHistory=true&swipeRefresh=true";
+  const params = new URLSearchParams({
+    pid: "referral",
+    c: "conversion_securities_performance",
+    af_adset: "securities_20201026_soojung",
+    is_retargeting: "true",
+    id: "3b735cc3-0cea-412c-9ac2-bbb2052009f5",
+    af_param_forwarding: "false",
+    af_dp: deepLink,
+    af_force_deeplink: "true",
+  });
+
+  return `https://toss.onelink.me/3563614660?${params.toString()}`;
 }
 
 function openPrimarySecurityLink(card) {
   const url = card.dataset.primaryUrl;
   if (!url) return;
-  window.open(url, "_blank", "noopener,noreferrer");
+  window.location.href = url;
 }
 
 function bindCardLink(card) {
@@ -199,13 +217,12 @@ function createCard(item, queueCode, displayIndex, prices) {
   const node = cardTemplate.content.cloneNode(true);
   const card = node.querySelector(".stock-card");
   const queuePosition = `${queueCode}-${displayIndex}`;
-  const securitiesUrl = securitiesUrlForItem(item);
-  const securitiesLabel = securitiesLabelForItem(item);
+  const tossUrl = tossAppUrlForItem(item);
 
-  card.dataset.primaryUrl = securitiesUrl;
+  card.dataset.primaryUrl = tossUrl;
   card.setAttribute(
     "aria-label",
-    `${item.name} (${item.ticker}) ${securitiesLabel} 페이지 새 탭에서 열기`,
+    `${item.name} (${item.ticker}) 토스증권 앱에서 열기`,
   );
   card.querySelector(".position-badge").textContent = queuePosition;
   card.querySelector("h3").textContent = item.name;
@@ -230,9 +247,9 @@ function createCard(item, queueCode, displayIndex, prices) {
   card.querySelector('[data-field="changeReason"]').textContent =
     `변경 사유: ${item.changeReason}`;
   const primaryLink = card.querySelector(".primary-link");
-  primaryLink.href = securitiesUrl;
-  primaryLink.textContent = securitiesLabel === "네이버증권" ? "네이버" : "Yahoo";
-  primaryLink.setAttribute("aria-label", `${item.name} ${securitiesLabel} 열기`);
+  primaryLink.href = tossUrl;
+  primaryLink.textContent = "토스";
+  primaryLink.setAttribute("aria-label", `${item.name} 토스증권 앱에서 열기`);
   bindCardLink(card);
 
   return node;
