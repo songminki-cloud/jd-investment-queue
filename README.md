@@ -65,7 +65,7 @@ jd-investment-queue/
 - priority 낮은 숫자순 정렬
 - priority가 없거나 null인 항목은 컬럼 하단 배치
 - PC에서는 4컬럼 보드로 표시
-- 모바일에서는 상단 A/B/C/D 앵커탭과 세로 큐 섹션으로 표시
+- 모바일에서는 요약 아래, 리스트 바로 위에 sticky A/B/C/D 앵커탭과 세로 큐 섹션으로 표시
 
 ## 큐 위치 코드
 

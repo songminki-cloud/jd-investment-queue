@@ -149,6 +149,28 @@ function renderBoard(groups) {
   board.replaceChildren(...columns);
 }
 
+function setupQueueTabs() {
+  document.querySelectorAll(".queue-tabs a").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href")?.slice(1);
+      const target = targetId ? document.getElementById(targetId) : null;
+      if (!target) return;
+
+      event.preventDefault();
+      history.replaceState(null, "", `#${targetId}`);
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  if (window.location.hash) {
+    requestAnimationFrame(() => {
+      document
+        .getElementById(window.location.hash.slice(1))
+        ?.scrollIntoView({ block: "start" });
+    });
+  }
+}
+
 async function init() {
   try {
     const response = await fetch("investment-queue.json", { cache: "no-store" });
@@ -158,6 +180,7 @@ async function init() {
     const groups = groupByCategory(items);
     renderSummary(groups, items);
     renderBoard(groups);
+    setupQueueTabs();
   } catch (error) {
     board.innerHTML = `<p class="error">${error.message}<br>로컬 서버로 실행했는지 확인하세요.</p>`;
   }

@@ -28,7 +28,7 @@ body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
   letter-spacing: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 html {
@@ -40,7 +40,7 @@ html {
   max-width: 100vw;
   margin: 0 auto;
   padding: 20px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .topbar {
@@ -424,17 +424,19 @@ h1 {
 
   .queue-tabs {
     position: sticky;
-    top: 0;
-    z-index: 10;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 5px;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     padding: 8px 0;
     border-top: 1px solid #202630;
     border-bottom: 1px solid #202630;
     background: rgba(16, 18, 20, 0.96);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
   }
 
   .queue-tabs a {
@@ -509,15 +511,16 @@ h1 {
   }
 
   .queue-column {
-    scroll-margin-top: 62px;
+    scroll-margin-top: 68px;
   }
 
   .column-header {
     position: sticky;
-    top: 53px;
+    top: calc(env(safe-area-inset-top, 0px) + 53px);
     z-index: 4;
     padding: 10px;
     background: rgba(23, 26, 31, 0.96);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
   }
 
