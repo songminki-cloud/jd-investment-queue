@@ -32,8 +32,10 @@ body {
 
 .app-shell {
   width: min(1440px, 100%);
+  max-width: 100vw;
   margin: 0 auto;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 .topbar {
@@ -147,8 +149,11 @@ h1 {
 }
 
 .board-wrap {
+  width: 100%;
   overflow-x: auto;
   padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
 }
 
 .board {
@@ -163,6 +168,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
+  scroll-snap-align: start;
 }
 
 .column-header {
@@ -175,7 +181,29 @@ h1 {
 }
 
 .column-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-size: 17px;
+}
+
+.queue-code,
+.position-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: #242a33;
+  color: var(--text);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.queue-code {
+  width: 25px;
+  height: 25px;
+  font-size: 13px;
 }
 
 .column-header p {
@@ -214,8 +242,21 @@ h1 {
 .stock-head {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 8px;
+}
+
+.stock-head > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.position-badge {
+  min-width: 36px;
+  height: 25px;
+  padding: 0 7px;
+  color: #dbe7f4;
+  font-size: 12px;
 }
 
 .stock-head h3 {
@@ -349,21 +390,67 @@ h1 {
 }
 
 @media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+
   .topbar {
     display: grid;
+    gap: 10px;
   }
 
   .meta-box {
     width: 100%;
+    padding: 8px 10px;
     text-align: left;
   }
 
   .summary-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .summary-card {
+    min-height: 78px;
+    padding: 10px;
+  }
+
+  .summary-card strong {
+    font-size: 20px;
+  }
+
+  .summary-card p {
+    font-size: 12px;
+  }
+
+  .recent-card {
+    grid-column: 1 / -1;
   }
 
   .board {
-    grid-template-columns: repeat(4, minmax(252px, 78vw));
+    grid-template-columns: repeat(4, minmax(236px, 84vw));
     min-width: max-content;
+    gap: 10px;
+  }
+
+  .column-header {
+    padding: 10px;
+  }
+
+  .card-list {
+    gap: 7px;
+    padding: 8px;
+  }
+
+  .stock-card {
+    padding: 10px;
+  }
+
+  .stock-head h3 {
+    font-size: 15px;
+  }
+
+  .stock-lines div {
+    grid-template-columns: 36px minmax(0, 1fr);
   }
 }
