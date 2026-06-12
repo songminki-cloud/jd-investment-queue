@@ -133,6 +133,7 @@ function renderBoard(groups) {
     const column = node.querySelector(".queue-column");
     const items = groups[category.key];
 
+    column.id = `queue-${category.code}`;
     column.querySelector(".queue-code").textContent = category.code;
     column.querySelector(".queue-title").textContent = category.key;
     column.querySelector(".column-header p").textContent = category.hint;
