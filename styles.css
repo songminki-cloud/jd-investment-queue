@@ -1,0 +1,369 @@
+:root {
+  color-scheme: dark;
+  --bg: #101214;
+  --panel: #171a1f;
+  --panel-2: #1d2128;
+  --line: #303640;
+  --text: #eef2f6;
+  --muted: #9aa4b2;
+  --faint: #6d7683;
+  --green-bg: #133326;
+  --green: #7bd8a6;
+  --amber-bg: #3a2d12;
+  --amber: #f4c76b;
+  --gray-bg: #2b3037;
+  --gray: #b3bcc8;
+  --danger: #f08a8a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+  letter-spacing: 0;
+}
+
+.app-shell {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.12;
+}
+
+.meta-box {
+  flex: 0 0 auto;
+  min-width: 112px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  text-align: right;
+}
+
+.meta-box span,
+.summary-label {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.meta-box strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.summary-card {
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.summary-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.summary-card p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.recent-card {
+  grid-column: 1 / -1;
+  min-height: 0;
+}
+
+.recent-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.recent-list li {
+  min-width: 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.recent-list strong {
+  display: inline;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.board-wrap {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
+  gap: 12px;
+  min-width: 1088px;
+}
+
+.queue-column {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.column-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.column-header h2 {
+  font-size: 17px;
+}
+
+.column-header p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.column-count {
+  flex: 0 0 auto;
+  min-width: 34px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.card-list {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+}
+
+.stock-card {
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #262c35;
+  border-radius: 8px;
+  background: #14171c;
+}
+
+.stock-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stock-head h3 {
+  font-size: 16px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.ticker {
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.status-pill,
+.market-chip,
+.priority-chip,
+.holding-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  max-width: 100%;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.status-confirmed {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.status-suggested {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+
+.status-paused {
+  background: var(--gray-bg);
+  color: var(--gray);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 9px 0;
+}
+
+.market-chip,
+.priority-chip,
+.holding-chip {
+  background: var(--panel-2);
+  color: var(--gray);
+}
+
+.stock-lines {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.stock-lines div {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 8px;
+}
+
+.stock-lines dt {
+  color: var(--faint);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.stock-lines dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.34;
+  overflow-wrap: anywhere;
+}
+
+.card-foot {
+  display: grid;
+  gap: 3px;
+  margin-top: 9px;
+  padding-top: 8px;
+  border-top: 1px solid #262c35;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.disclaimer {
+  margin-top: 8px;
+  padding: 10px 2px 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.error {
+  grid-column: 1 / -1;
+  padding: 16px;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  color: var(--danger);
+  background: #241719;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    padding: 14px;
+  }
+
+  .topbar {
+    align-items: stretch;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recent-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar {
+    display: grid;
+  }
+
+  .meta-box {
+    width: 100%;
+    text-align: left;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .board {
+    grid-template-columns: repeat(4, minmax(252px, 78vw));
+    min-width: max-content;
+  }
+}

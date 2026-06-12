@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JD 투자 큐 보드 MVP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">김수석 판단 큐</p>
+          <h1>JD 투자 큐 보드</h1>
+        </div>
+        <div class="meta-box">
+          <span>읽기 전용</span>
+          <strong id="itemCount">-</strong>
+        </div>
+      </header>
+
+      <section class="summary-grid" aria-label="큐 요약">
+        <article class="summary-card">
+          <span class="summary-label">신규매수</span>
+          <strong id="summary-new-count">0개</strong>
+          <p id="summary-new-top">1순위 없음</p>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">추가매수</span>
+          <strong id="summary-add-count">0개</strong>
+          <p id="summary-add-top">1순위 없음</p>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">관망</span>
+          <strong id="summary-watch-count">0개</strong>
+          <p id="summary-watch-top">1순위 없음</p>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">보유관리</span>
+          <strong id="summary-hold-count">0개</strong>
+          <p id="summary-hold-top">1순위 없음</p>
+        </article>
+        <article class="summary-card recent-card">
+          <span class="summary-label">최근 변경 5개</span>
+          <ol id="recentList" class="recent-list"></ol>
+        </article>
+      </section>
+
+      <section class="board-wrap" aria-label="투자 판단 큐 보드">
+        <div id="board" class="board" aria-live="polite"></div>
+      </section>
+
+      <footer class="disclaimer">
+        매매 실행/추천 도구가 아니라 김수석 판단 큐 시각화 도구입니다. 샘플 데이터는 매수 추천이 아니며, 정확한 리스트는 이후 김수석 원장 기준으로 조정합니다.
+      </footer>
+    </main>
+
+    <template id="columnTemplate">
+      <section class="queue-column">
+        <header class="column-header">
+          <div>
+            <h2></h2>
+            <p></p>
+          </div>
+          <span class="column-count"></span>
+        </header>
+        <div class="card-list"></div>
+      </section>
+    </template>
+
+    <template id="cardTemplate">
+      <article class="stock-card">
+        <header class="stock-head">
+          <div>
+            <h3></h3>
+            <p class="ticker"></p>
+          </div>
+          <span class="status-pill"></span>
+        </header>
+        <div class="chips">
+          <span class="market-chip"></span>
+          <span class="priority-chip"></span>
+          <span class="holding-chip"></span>
+        </div>
+        <dl class="stock-lines">
+          <div>
+            <dt>논리</dt>
+            <dd data-field="thesis"></dd>
+          </div>
+          <div>
+            <dt>다음</dt>
+            <dd data-field="nextAction"></dd>
+          </div>
+          <div>
+            <dt>리스크</dt>
+            <dd data-field="risk"></dd>
+          </div>
+        </dl>
+        <footer class="card-foot">
+          <span data-field="lastUpdated"></span>
+          <span data-field="changeReason"></span>
+        </footer>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
