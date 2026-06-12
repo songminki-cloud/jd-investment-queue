@@ -148,15 +148,21 @@ function isKoreanTicker(item) {
   return market === "KR" || market === "ETF" || (market !== "US" && /^\d{6}$/.test(ticker));
 }
 
-function tossUrlForItem(item) {
+function securitiesUrlForItem(item) {
+  const market = String(item.market || "").toUpperCase();
   const ticker = String(item.ticker || "").trim().toUpperCase();
-  if (!ticker) return "https://www.tossinvest.com/";
+  if (!ticker) return "https://finance.yahoo.com/";
 
-  if (isKoreanTicker(item) || item.market === "ETF") {
-    return `https://www.tossinvest.com/stocks/A${encodeURIComponent(ticker)}`;
+  if (isKoreanTicker(item)) {
+    const naverType = market === "ETF" ? "etf" : "stock";
+    return `https://m.stock.naver.com/domestic/${naverType}/${encodeURIComponent(ticker)}/total`;
   }
 
-  return `https://www.tossinvest.com/stocks/${encodeURIComponent(ticker)}`;
+  return `https://finance.yahoo.com/quote/${encodeURIComponent(ticker)}`;
+}
+
+function securitiesLabelForItem(item) {
+  return isKoreanTicker(item) ? "네이버증권" : "Yahoo Finance";
 }
 
 function openPrimarySecurityLink(card) {
@@ -193,12 +199,13 @@ function createCard(item, queueCode, displayIndex, prices) {
   const node = cardTemplate.content.cloneNode(true);
   const card = node.querySelector(".stock-card");
   const queuePosition = `${queueCode}-${displayIndex}`;
-  const tossUrl = tossUrlForItem(item);
+  const securitiesUrl = securitiesUrlForItem(item);
+  const securitiesLabel = securitiesLabelForItem(item);
 
-  card.dataset.primaryUrl = tossUrl;
+  card.dataset.primaryUrl = securitiesUrl;
   card.setAttribute(
     "aria-label",
-    `${item.name} (${item.ticker}) 토스증권 페이지 새 탭에서 열기`,
+    `${item.name} (${item.ticker}) ${securitiesLabel} 페이지 새 탭에서 열기`,
   );
   card.querySelector(".position-badge").textContent = queuePosition;
   card.querySelector("h3").textContent = item.name;
@@ -222,9 +229,10 @@ function createCard(item, queueCode, displayIndex, prices) {
     `마지막 변경일: ${item.lastUpdated}`;
   card.querySelector('[data-field="changeReason"]').textContent =
     `변경 사유: ${item.changeReason}`;
-  const tossLink = card.querySelector(".toss-link");
-  tossLink.href = tossUrl;
-  tossLink.setAttribute("aria-label", `${item.name} 토스증권 열기`);
+  const primaryLink = card.querySelector(".primary-link");
+  primaryLink.href = securitiesUrl;
+  primaryLink.textContent = securitiesLabel === "네이버증권" ? "네이버" : "Yahoo";
+  primaryLink.setAttribute("aria-label", `${item.name} ${securitiesLabel} 열기`);
   bindCardLink(card);
 
   return node;
