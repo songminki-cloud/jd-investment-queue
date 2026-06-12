@@ -13,6 +13,8 @@
   --amber: #f4c76b;
   --gray-bg: #2b3037;
   --gray: #b3bcc8;
+  --blue-bg: #14283d;
+  --blue: #8fbfff;
   --danger: #f08a8a;
 }
 
@@ -78,6 +80,45 @@ h1 {
   border-radius: 8px;
   background: var(--panel);
   text-align: right;
+}
+
+.top-actions {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+}
+
+.refresh-button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.refresh-button:hover,
+.refresh-button:focus-visible {
+  border-color: #4a5565;
+  background: #242a33;
+}
+
+.refresh-button:disabled {
+  cursor: progress;
+  opacity: 0.62;
+}
+
+.refresh-status {
+  max-width: 168px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .meta-box span,
@@ -306,7 +347,8 @@ h1 {
 .market-chip,
 .priority-chip,
 .holding-chip,
-.source-chip {
+.source-chip,
+.change-chip {
   display: inline-flex;
   align-items: center;
   min-height: 22px;
@@ -346,6 +388,21 @@ h1 {
 .holding-chip,
 .source-chip {
   background: var(--panel-2);
+  color: var(--gray);
+}
+
+.change-positive {
+  background: #391b1d;
+  color: #ff9a9a;
+}
+
+.change-negative {
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+.change-flat {
+  background: var(--gray-bg);
   color: var(--gray);
 }
 
@@ -410,6 +467,15 @@ h1 {
 
   .topbar {
     align-items: stretch;
+  }
+
+  .top-actions {
+    justify-items: stretch;
+  }
+
+  .refresh-status {
+    max-width: none;
+    text-align: left;
   }
 
   .summary-grid {

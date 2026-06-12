@@ -13,9 +13,13 @@
           <p class="eyebrow">김수석 판단 큐</p>
           <h1>JD 투자 큐 보드</h1>
         </div>
-        <div class="meta-box">
-          <span>ITEMS</span>
-          <strong id="itemCount">-</strong>
+        <div class="top-actions">
+          <button id="refreshButton" class="refresh-button" type="button">새로고침</button>
+          <div class="meta-box">
+            <span>ITEMS</span>
+            <strong id="itemCount">-</strong>
+          </div>
+          <span id="refreshStatus" class="refresh-status">대기</span>
         </div>
       </header>
 
@@ -90,6 +94,7 @@
           <span class="priority-chip"></span>
           <span class="holding-chip"></span>
           <span class="source-chip"></span>
+          <span class="change-chip" hidden></span>
         </div>
         <dl class="stock-lines">
           <div>

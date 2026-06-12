@@ -38,6 +38,9 @@ const statusClass = {
 const board = document.querySelector("#board");
 const columnTemplate = document.querySelector("#columnTemplate");
 const cardTemplate = document.querySelector("#cardTemplate");
+const refreshButton = document.querySelector("#refreshButton");
+const refreshStatus = document.querySelector("#refreshStatus");
+let queueTabsInitialized = false;
 
 function priorityRank(item) {
   return Number.isFinite(item.priority) ? item.priority : Number.POSITIVE_INFINITY;
@@ -98,7 +101,38 @@ function renderSummary(groups, items) {
   );
 }
 
-function createCard(item, queueCode, displayIndex) {
+function formatChangePct(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return null;
+  const sign = number > 0 ? "+" : "";
+  return `${sign}${number.toFixed(2)}%`;
+}
+
+function priceForItem(item, prices) {
+  const items = prices?.items || {};
+  return items[item.ticker] || items[item.ticker?.toUpperCase()] || items[item.id] || null;
+}
+
+function setChangeChip(card, item, prices) {
+  const changeChip = card.querySelector(".change-chip");
+  const price = priceForItem(item, prices);
+  const formatted = formatChangePct(price?.changePct);
+
+  if (!formatted) {
+    changeChip.hidden = true;
+    return;
+  }
+
+  const changePct = Number(price.changePct);
+  changeChip.hidden = false;
+  changeChip.textContent = formatted;
+  changeChip.classList.toggle("change-positive", changePct > 0);
+  changeChip.classList.toggle("change-negative", changePct < 0);
+  changeChip.classList.toggle("change-flat", changePct === 0);
+  changeChip.title = [price.source, price.updatedAt].filter(Boolean).join(" · ");
+}
+
+function createCard(item, queueCode, displayIndex, prices) {
   const node = cardTemplate.content.cloneNode(true);
   const card = node.querySelector(".stock-card");
   const queuePosition = `${queueCode}-${displayIndex}`;
@@ -117,6 +151,7 @@ function createCard(item, queueCode, displayIndex) {
     : `${queuePosition} · 우선순위 없음`;
   card.querySelector(".holding-chip").textContent = item.holdingStatus;
   card.querySelector(".source-chip").textContent = item.sourceType || "출처 미분류";
+  setChangeChip(card, item, prices);
   card.querySelector('[data-field="thesis"]').textContent = item.thesis;
   card.querySelector('[data-field="nextAction"]').textContent = item.nextAction;
   card.querySelector('[data-field="risk"]').textContent = item.risk;
@@ -128,7 +163,7 @@ function createCard(item, queueCode, displayIndex) {
   return node;
 }
 
-function renderBoard(groups) {
+function renderBoard(groups, prices) {
   const columns = categories.map((category) => {
     const node = columnTemplate.content.cloneNode(true);
     const column = node.querySelector(".queue-column");
@@ -142,7 +177,7 @@ function renderBoard(groups) {
 
     const cardList = column.querySelector(".card-list");
     cardList.replaceChildren(
-      ...items.map((item, index) => createCard(item, category.code, index + 1)),
+      ...items.map((item, index) => createCard(item, category.code, index + 1, prices)),
     );
     return node;
   });
@@ -151,6 +186,9 @@ function renderBoard(groups) {
 }
 
 function setupQueueTabs() {
+  if (queueTabsInitialized) return;
+  queueTabsInitialized = true;
+
   document.querySelectorAll(".queue-tabs a, .summary-link").forEach((link) => {
     link.addEventListener("click", (event) => {
       const targetId = link.getAttribute("href")?.slice(1);
@@ -172,19 +210,42 @@ function setupQueueTabs() {
   }
 }
 
-async function init() {
-  try {
-    const response = await fetch("investment-queue.json", { cache: "no-store" });
-    if (!response.ok) throw new Error(`JSON 로딩 실패: ${response.status}`);
+function setRefreshStatus(text) {
+  refreshStatus.textContent = text;
+}
 
-    const items = await response.json();
+async function fetchJson(path, options = {}) {
+  const cacheBust = Date.now();
+  const response = await fetch(`${path}?v=${cacheBust}`, { cache: "no-store" });
+  if (!response.ok) {
+    if (options.optional) return null;
+    throw new Error(`${path} 로딩 실패: ${response.status}`);
+  }
+  return response.json();
+}
+
+async function loadAndRender(isManualRefresh = false) {
+  try {
+    refreshButton.disabled = true;
+    setRefreshStatus(isManualRefresh ? "업데이트 중" : "로딩 중");
+
+    const [items, prices] = await Promise.all([
+      fetchJson("investment-queue.json"),
+      fetchJson("market-prices.json", { optional: true }),
+    ]);
     const groups = groupByCategory(items);
     renderSummary(groups, items);
-    renderBoard(groups);
+    renderBoard(groups, prices);
     setupQueueTabs();
+    setRefreshStatus(prices?.updatedAt ? `가격 ${prices.updatedAt}` : "큐 최신");
   } catch (error) {
     board.innerHTML = `<p class="error">${error.message}<br>로컬 서버로 실행했는지 확인하세요.</p>`;
+    setRefreshStatus("오류");
+  } finally {
+    refreshButton.disabled = false;
   }
 }
 
-init();
+refreshButton.addEventListener("click", () => loadAndRender(true));
+
+loadAndRender();

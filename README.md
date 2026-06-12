@@ -27,6 +27,7 @@ jd-investment-queue/
   styles.css
   app.js
   investment-queue.json
+  market-prices.json
   README.md
 ```
 
@@ -87,6 +88,39 @@ git push origin main
 ```
 
 GitHub Pages 반영에는 보통 수십 초에서 몇 분이 걸릴 수 있습니다.
+
+## 등락률 데이터
+
+우측 상단 `새로고침` 버튼은 `investment-queue.json`과 `market-prices.json`을 캐시 없이 다시 읽습니다.
+
+브라우저에서 GitHub Pages 정적 화면이 네이버증권을 직접 `fetch`하는 방식은 CORS 때문에 안정적으로 쓸 수 없습니다. 따라서 등락률은 별도 스크립트, GitHub Action, 또는 서버 프록시가 `market-prices.json`을 갱신하고, 화면은 그 JSON을 읽는 구조로 운영합니다.
+
+`market-prices.json` 형식:
+
+```json
+{
+  "updatedAt": "2026-06-12 16:45",
+  "source": "generated",
+  "items": {
+    "PLTR": {
+      "changePct": 1.23,
+      "updatedAt": "2026-06-12 16:45",
+      "source": "Yahoo Finance"
+    },
+    "005930": {
+      "changePct": -0.52,
+      "updatedAt": "2026-06-12 16:45",
+      "source": "Naver Finance"
+    }
+  }
+}
+```
+
+색상 기준:
+
+- 플러스: 빨강
+- 마이너스: 파랑
+- 0 또는 변동 없음: 회색
 
 ## 개별 카드 원칙
 
