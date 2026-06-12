@@ -1,0 +1,44 @@
+name: Update market prices
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-market-prices
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Update market price snapshot
+        run: node scripts/update-market-prices.mjs
+
+      - name: Validate generated JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('market-prices.json', 'utf8'))"
+
+      - name: Commit updated market prices
+        run: |
+          if git diff --quiet -- market-prices.json; then
+            echo "market-prices.json unchanged"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add market-prices.json
+          git commit -m "Update market prices"
+          git push

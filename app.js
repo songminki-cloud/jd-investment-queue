@@ -359,7 +359,7 @@ async function loadAndRender(isManualRefresh = false) {
     renderSummary(groups, items, prices);
     renderBoard(groups, prices);
     setupQueueTabs();
-    setRefreshStatus(prices?.updatedAt ? `수동가격 ${prices.updatedAt}` : "큐 최신");
+    setRefreshStatus(prices?.updatedAt ? `가격 기준 ${prices.updatedAt}` : "큐 최신");
   } catch (error) {
     board.innerHTML = `<p class="error">${error.message}<br>로컬 서버로 실행했는지 확인하세요.</p>`;
     setRefreshStatus("오류");
