@@ -520,40 +520,6 @@ h1 {
   gap: 3px;
 }
 
-.card-links {
-  display: flex;
-  flex: 0 0 auto;
-  gap: 5px;
-}
-
-.security-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  min-height: 28px;
-  padding: 5px 8px;
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  background: var(--panel-2);
-  color: var(--text);
-  font-size: 11px;
-  font-weight: 900;
-  line-height: 1;
-  text-decoration: none;
-}
-
-.security-link:hover,
-.security-link:focus-visible {
-  border-color: #5b687a;
-  background: #252b34;
-}
-
-.security-link:focus-visible {
-  outline: 2px solid #6f87a8;
-  outline-offset: 2px;
-}
-
 .disclaimer {
   margin-top: 8px;
   padding: 10px 2px 0;
@@ -745,14 +711,5 @@ h1 {
   .card-foot {
     display: grid;
     gap: 8px;
-  }
-
-  .card-links {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .security-link {
-    min-height: 34px;
   }
 }

@@ -280,10 +280,6 @@ function createCard(item, queueCode, displayIndex, prices) {
     `마지막 변경일: ${item.lastUpdated}`;
   card.querySelector('[data-field="changeReason"]').textContent =
     `변경 사유: ${item.changeReason}`;
-  const primaryLink = card.querySelector(".primary-link");
-  primaryLink.href = tossUrl;
-  primaryLink.textContent = "토스";
-  primaryLink.setAttribute("aria-label", `${item.name} 토스증권 앱에서 열기`);
   bindCardLink(card);
 
   return node;
