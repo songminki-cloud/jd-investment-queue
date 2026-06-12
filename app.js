@@ -63,7 +63,7 @@ function groupByCategory(items) {
   }, {});
 }
 
-function renderSummary(groups, items) {
+function renderSummary(groups, items, prices) {
   document.querySelector("#itemCount").textContent = `${items.length}개`;
 
   categories.forEach((category) => {
@@ -87,10 +87,15 @@ function renderSummary(groups, items) {
   recentList.replaceChildren(
     ...recent.map((item) => {
       const li = document.createElement("li");
+      const titleRow = document.createElement("span");
+      titleRow.className = "recent-title-row";
       const name = document.createElement("strong");
       name.textContent = item.name;
+      const changeChip = createChangeChip(item, prices);
+      titleRow.append(name);
+      if (changeChip) titleRow.append(changeChip);
       li.append(
-        name,
+        titleRow,
         document.createElement("br"),
         `${item.category} · ${item.lastUpdated}`,
         document.createElement("br"),
@@ -113,15 +118,10 @@ function priceForItem(item, prices) {
   return items[item.ticker] || items[item.ticker?.toUpperCase()] || items[item.id] || null;
 }
 
-function setChangeChip(card, item, prices) {
-  const changeChip = card.querySelector(".change-chip");
-  const price = priceForItem(item, prices);
+function applyChangeChipState(changeChip, price) {
   const formatted = formatChangePct(price?.changePct);
 
-  if (!formatted) {
-    changeChip.hidden = true;
-    return;
-  }
+  if (!formatted) return false;
 
   const changePct = Number(price.changePct);
   changeChip.hidden = false;
@@ -130,6 +130,25 @@ function setChangeChip(card, item, prices) {
   changeChip.classList.toggle("change-negative", changePct < 0);
   changeChip.classList.toggle("change-flat", changePct === 0);
   changeChip.title = [price.source, price.updatedAt].filter(Boolean).join(" · ");
+  return true;
+}
+
+function createChangeChip(item, prices) {
+  const price = priceForItem(item, prices);
+  const changeChip = document.createElement("span");
+  changeChip.className = "change-chip";
+  changeChip.hidden = true;
+
+  return applyChangeChipState(changeChip, price) ? changeChip : null;
+}
+
+function setChangeChip(card, item, prices) {
+  const changeChip = card.querySelector(".change-chip");
+  const price = priceForItem(item, prices);
+
+  if (!applyChangeChipState(changeChip, price)) {
+    changeChip.hidden = true;
+  }
 }
 
 function createCard(item, queueCode, displayIndex, prices) {
@@ -234,10 +253,10 @@ async function loadAndRender(isManualRefresh = false) {
       fetchJson("market-prices.json", { optional: true }),
     ]);
     const groups = groupByCategory(items);
-    renderSummary(groups, items);
+    renderSummary(groups, items, prices);
     renderBoard(groups, prices);
     setupQueueTabs();
-    setRefreshStatus(prices?.updatedAt ? `가격 ${prices.updatedAt}` : "큐 최신");
+    setRefreshStatus(prices?.updatedAt ? `수동가격 ${prices.updatedAt}` : "큐 최신");
   } catch (error) {
     board.innerHTML = `<p class="error">${error.message}<br>로컬 서버로 실행했는지 확인하세요.</p>`;
     setRefreshStatus("오류");

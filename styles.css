@@ -223,6 +223,26 @@ h1 {
   font-size: 13px;
 }
 
+.recent-title-row {
+  display: inline-flex;
+  align-items: baseline;
+  max-width: 100%;
+  gap: 6px;
+}
+
+.recent-title-row strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.recent-title-row .change-chip {
+  flex: 0 0 auto;
+  min-height: 19px;
+  padding: 2px 6px;
+  font-size: 10px;
+  transform: translateY(-1px);
+}
+
 .board-wrap {
   width: 100%;
   overflow-x: auto;
