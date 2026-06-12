@@ -148,17 +148,6 @@ function isKoreanTicker(item) {
   return market === "KR" || market === "ETF" || (market !== "US" && /^\d{6}$/.test(ticker));
 }
 
-function securitiesUrlForItem(item) {
-  const ticker = String(item.ticker || "").trim().toUpperCase();
-  if (!ticker) return "https://finance.naver.com/";
-
-  if (isKoreanTicker(item)) {
-    return `https://finance.naver.com/item/main.naver?code=${encodeURIComponent(ticker)}`;
-  }
-
-  return `https://m.stock.naver.com/worldstock/search/${encodeURIComponent(ticker)}`;
-}
-
 function tossUrlForItem(item) {
   const ticker = String(item.ticker || "").trim().toUpperCase();
   if (!ticker) return "https://www.tossinvest.com/";
@@ -168,10 +157,6 @@ function tossUrlForItem(item) {
   }
 
   return `https://www.tossinvest.com/stocks/${encodeURIComponent(ticker)}`;
-}
-
-function primarySecuritiesUrlForItem(item) {
-  return isKoreanTicker(item) ? securitiesUrlForItem(item) : tossUrlForItem(item);
 }
 
 function openPrimarySecurityLink(card) {
@@ -208,15 +193,12 @@ function createCard(item, queueCode, displayIndex, prices) {
   const node = cardTemplate.content.cloneNode(true);
   const card = node.querySelector(".stock-card");
   const queuePosition = `${queueCode}-${displayIndex}`;
-  const naverUrl = securitiesUrlForItem(item);
   const tossUrl = tossUrlForItem(item);
-  const primaryUrl = primarySecuritiesUrlForItem(item);
-  const primaryLabel = isKoreanTicker(item) ? "네이버 금융" : "토스증권";
 
-  card.dataset.primaryUrl = primaryUrl;
+  card.dataset.primaryUrl = tossUrl;
   card.setAttribute(
     "aria-label",
-    `${item.name} (${item.ticker}) ${primaryLabel} 페이지 새 탭에서 열기`,
+    `${item.name} (${item.ticker}) 토스증권 페이지 새 탭에서 열기`,
   );
   card.querySelector(".position-badge").textContent = queuePosition;
   card.querySelector("h3").textContent = item.name;
@@ -240,10 +222,6 @@ function createCard(item, queueCode, displayIndex, prices) {
     `마지막 변경일: ${item.lastUpdated}`;
   card.querySelector('[data-field="changeReason"]').textContent =
     `변경 사유: ${item.changeReason}`;
-  const naverLink = card.querySelector(".naver-link");
-  naverLink.href = naverUrl;
-  naverLink.textContent = isKoreanTicker(item) ? "네이버" : "네이버검색";
-  naverLink.setAttribute("aria-label", `${item.name} 네이버 금융 열기`);
   const tossLink = card.querySelector(".toss-link");
   tossLink.href = tossUrl;
   tossLink.setAttribute("aria-label", `${item.name} 토스증권 열기`);
