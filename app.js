@@ -143,19 +143,56 @@ function createChangeChip(item, prices) {
 }
 
 function isKoreanTicker(item) {
-  return item.market === "KR" || /^\d{6}$/.test(item.ticker);
+  const market = String(item.market || "").toUpperCase();
+  const ticker = String(item.ticker || "").trim().toUpperCase();
+  return market === "KR" || market === "ETF" || (market !== "US" && /^\d{6}$/.test(ticker));
 }
 
 function securitiesUrlForItem(item) {
-  const ticker = String(item.ticker || "").trim();
+  const ticker = String(item.ticker || "").trim().toUpperCase();
   if (!ticker) return "https://finance.naver.com/";
 
   if (isKoreanTicker(item)) {
     return `https://finance.naver.com/item/main.naver?code=${encodeURIComponent(ticker)}`;
   }
 
-  const query = `${item.name || ""} ${ticker}`.trim();
-  return `https://finance.naver.com/search/search.naver?query=${encodeURIComponent(query)}`;
+  return `https://m.stock.naver.com/worldstock/search/${encodeURIComponent(ticker)}`;
+}
+
+function tossUrlForItem(item) {
+  const ticker = String(item.ticker || "").trim().toUpperCase();
+  if (!ticker) return "https://www.tossinvest.com/";
+
+  if (isKoreanTicker(item) || item.market === "ETF") {
+    return `https://www.tossinvest.com/stocks/A${encodeURIComponent(ticker)}`;
+  }
+
+  return `https://www.tossinvest.com/stocks/${encodeURIComponent(ticker)}`;
+}
+
+function primarySecuritiesUrlForItem(item) {
+  return isKoreanTicker(item) ? securitiesUrlForItem(item) : tossUrlForItem(item);
+}
+
+function openPrimarySecurityLink(card) {
+  const url = card.dataset.primaryUrl;
+  if (!url) return;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function bindCardLink(card) {
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a, button")) return;
+    openPrimarySecurityLink(card);
+  });
+
+  card.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    if (event.target.closest("a, button")) return;
+
+    event.preventDefault();
+    openPrimarySecurityLink(card);
+  });
 }
 
 function setChangeChip(card, item, prices) {
@@ -171,13 +208,15 @@ function createCard(item, queueCode, displayIndex, prices) {
   const node = cardTemplate.content.cloneNode(true);
   const card = node.querySelector(".stock-card");
   const queuePosition = `${queueCode}-${displayIndex}`;
+  const naverUrl = securitiesUrlForItem(item);
+  const tossUrl = tossUrlForItem(item);
+  const primaryUrl = primarySecuritiesUrlForItem(item);
+  const primaryLabel = isKoreanTicker(item) ? "네이버 금융" : "토스증권";
 
-  card.href = securitiesUrlForItem(item);
-  card.target = "_blank";
-  card.rel = "noopener noreferrer";
+  card.dataset.primaryUrl = primaryUrl;
   card.setAttribute(
     "aria-label",
-    `${item.name} (${item.ticker}) 증권 페이지 새 탭에서 열기`,
+    `${item.name} (${item.ticker}) ${primaryLabel} 페이지 새 탭에서 열기`,
   );
   card.querySelector(".position-badge").textContent = queuePosition;
   card.querySelector("h3").textContent = item.name;
@@ -201,6 +240,14 @@ function createCard(item, queueCode, displayIndex, prices) {
     `마지막 변경일: ${item.lastUpdated}`;
   card.querySelector('[data-field="changeReason"]').textContent =
     `변경 사유: ${item.changeReason}`;
+  const naverLink = card.querySelector(".naver-link");
+  naverLink.href = naverUrl;
+  naverLink.textContent = isKoreanTicker(item) ? "네이버" : "네이버검색";
+  naverLink.setAttribute("aria-label", `${item.name} 네이버 금융 열기`);
+  const tossLink = card.querySelector(".toss-link");
+  tossLink.href = tossUrl;
+  tossLink.setAttribute("aria-label", `${item.name} 토스증권 열기`);
+  bindCardLink(card);
 
   return node;
 }
