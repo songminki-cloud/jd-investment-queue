@@ -142,6 +142,22 @@ function createChangeChip(item, prices) {
   return applyChangeChipState(changeChip, price) ? changeChip : null;
 }
 
+function isKoreanTicker(item) {
+  return item.market === "KR" || /^\d{6}$/.test(item.ticker);
+}
+
+function securitiesUrlForItem(item) {
+  const ticker = String(item.ticker || "").trim();
+  if (!ticker) return "https://finance.naver.com/";
+
+  if (isKoreanTicker(item)) {
+    return `https://finance.naver.com/item/main.naver?code=${encodeURIComponent(ticker)}`;
+  }
+
+  const query = `${item.name || ""} ${ticker}`.trim();
+  return `https://finance.naver.com/search/search.naver?query=${encodeURIComponent(query)}`;
+}
+
 function setChangeChip(card, item, prices) {
   const changeChip = card.querySelector(".change-chip");
   const price = priceForItem(item, prices);
@@ -156,6 +172,13 @@ function createCard(item, queueCode, displayIndex, prices) {
   const card = node.querySelector(".stock-card");
   const queuePosition = `${queueCode}-${displayIndex}`;
 
+  card.href = securitiesUrlForItem(item);
+  card.target = "_blank";
+  card.rel = "noopener noreferrer";
+  card.setAttribute(
+    "aria-label",
+    `${item.name} (${item.ticker}) 증권 페이지 새 탭에서 열기`,
+  );
   card.querySelector(".position-badge").textContent = queuePosition;
   card.querySelector("h3").textContent = item.name;
   card.querySelector(".ticker").textContent = item.ticker;

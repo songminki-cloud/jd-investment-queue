@@ -328,11 +328,34 @@ h1 {
 }
 
 .stock-card {
+  display: block;
   min-width: 0;
   padding: 11px;
   border: 1px solid #262c35;
   border-radius: 8px;
   background: #14171c;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.stock-card:hover,
+.stock-card:focus-visible {
+  border-color: #4a5565;
+  background: #191d23;
+}
+
+.stock-card:hover {
+  transform: translateY(-1px);
+}
+
+.stock-card:focus-visible {
+  outline: 2px solid #6f87a8;
+  outline-offset: 2px;
 }
 
 .stock-head {
