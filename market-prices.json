@@ -1,280 +1,280 @@
 {
-  "updatedAt": "2026-11-20 22:28",
+  "updatedAt": "2026-11-21 06:29",
   "source": "manual",
   "items": {
     "AVGO": {
-      "changePct": -2.0901002683236927,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -12.185201211596699,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "MSFT": {
-      "changePct": -1.7760343774023757,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -2.7654023680513804,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "GOOGL": {
-      "changePct": -3.4626823396119435,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -2.7030000733514283,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "AMZN": {
-      "changePct": -3.8731605288712947,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -4.099156855888414,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "NVDA": {
-      "changePct": -3.298887122416546,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -14.008768324427997,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "PLTR": {
-      "changePct": -1.9084700325524868,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -6.630661114003121,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "NOW": {
-      "changePct": -1.8986643117341857,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -1.361539327107019,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "TSLA": {
-      "changePct": -2.4262483060565,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -7.6360139953526955,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "COHR": {
-      "changePct": 0.9866566434880635,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -12.896622313203684,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "CIEN": {
-      "changePct": -1.4743397358943602,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -10.76038533297795,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "LITE": {
-      "changePct": -2.8889251819188253,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -13.94188545267681,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "GLW": {
-      "changePct": -2.0157189089227985,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -10.93705765782769,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "MRVL": {
-      "changePct": -4.857771059502538,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -11.692063262800605,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "RKLB": {
-      "changePct": -3.9193517995100775,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -10.923710531476761,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "ASTS": {
-      "changePct": 0.2353864260494401,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -8.923679060665366,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "RDW": {
-      "changePct": -4.545454545454552,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -13.210445468509976,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "PL": {
-      "changePct": -3.485477178423236,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -9.45829750644885,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "CRWV": {
-      "changePct": -6.104955049132347,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -12.024048096192383,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "NBIS": {
-      "changePct": -9.386686611817495,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -16.106066859265372,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "IREN": {
-      "changePct": -5.4461942257217855,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -17.973629424011104,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "HUT": {
-      "changePct": -2.4304948417555527,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -17.652329749103934,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "TSLL": {
-      "changePct": -4.700000000000006,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -15.320041972717725,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "TEM": {
-      "changePct": -6.303049355548566,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -9.344069786948499,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "NFLX": {
-      "changePct": -2.273487128050818,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -2.9592884023263837,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "AAPL": {
-      "changePct": -0.919279330401478,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -1.9042982732453189,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "SBUX": {
-      "changePct": -4.252589130235543,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -1.2826648798698224,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "DIS": {
-      "changePct": -1.7244197450147103,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -1.8877338877338845,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "NKE": {
-      "changePct": -5.453043238777207,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -4.0635013108068625,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "BYND": {
-      "changePct": -2.819956616052058,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -15.178571428571441,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "QQQ": {
-      "changePct": -2.194053160679903,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -5.672516433089409,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "VOO": {
-      "changePct": -1.9812009354843447,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -3.477910670050606,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "ETN": {
-      "changePct": -2.2965064727788564,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -5.820249871434193,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "SU.PA": {
-      "changePct": -3.783209351753456,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -3.6981934112646075,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "VRT": {
-      "changePct": -4.879679144385017,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -10.135683009892427,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "GEV": {
-      "changePct": -2.0641786019528183,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -7.530279790553754,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "ENR.DE": {
-      "changePct": -5.335438042620367,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -6.61404893449093,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "7011.T": {
       "changePct": -5.453282389718652,
-      "updatedAt": "2026-11-20 22:28",
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "MU": {
-      "changePct": -2.1027407943057166,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -13.894038584091312,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "FN": {
-      "changePct": -2.60888583390615,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -8.556029642937334,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "CLS": {
-      "changePct": -1.2699325990465244,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -16.067934895724928,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "SIVE.ST": {
-      "changePct": -11.249086924762594,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -16.654492330168004,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "IQE.L": {
-      "changePct": -13.448739495798323,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -13.277310924369745,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "AXTI": {
-      "changePct": -2.1623139567537097,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -12.256027554535025,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "5802.T": {
       "changePct": -7.901602683563176,
-      "updatedAt": "2026-11-20 22:28",
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "5016.T": {
       "changePct": -9.540372670807454,
-      "updatedAt": "2026-11-20 22:28",
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "ORCL": {
-      "changePct": -2.9150935112828233,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -8.483313737903588,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "MP": {
-      "changePct": 1.9749652294853788,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -7.392253136933971,
+      "updatedAt": "2026-11-21 06:28",
       "source": "Yahoo Finance"
     },
     "LYC.AX": {
       "changePct": -2.736512900703672,
-      "updatedAt": "2026-11-20 22:28",
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     },
     "NEO.TO": {
-      "changePct": -2.4190064794816357,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -8.10092961487383,
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     },
     "META": {
-      "changePct": -3.2707096271780345,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -5.934051189158363,
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     },
     "AMD": {
-      "changePct": -7.724374693477193,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -13.24638688444163,
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     },
     "0981.HK": {
       "changePct": -2.7326732673267378,
-      "updatedAt": "2026-11-20 22:28",
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     },
     "BABA": {
-      "changePct": -1.2563707478961743,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -2.6767494898571647,
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     },
     "0700.HK": {
       "changePct": -1.262916188289316,
-      "updatedAt": "2026-11-20 22:28",
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     },
     "BIDU": {
-      "changePct": -4.089004479121512,
-      "updatedAt": "2026-11-20 22:28",
+      "changePct": -6.749020789394391,
+      "updatedAt": "2026-11-21 06:29",
       "source": "Yahoo Finance"
     }
   },
